@@ -1,12 +1,12 @@
-from math import exp
+from math import cos, sin
 
 
 def f(x):
-    return exp(-x) - x
+    return cos(x) - 1/(x-2)
 
 
 def df(x):
-    return -1 - exp(-x)
+    return (1/((x-2)*(x-2)))-sin(x)
 
 
 def main():
