@@ -1,37 +1,21 @@
 import math
+import numpy as np
 
 
 def f(x):
-    return math.sqrt((1+x)/(1-x))
+    return (1 / (x * (math.sqrt(9 - x * x))))
 
 
 def F(x):
-    return -math.sqrt(1 - pow(x, 2)) + math.asin(x)
+    return (1 / 3) * np.log(x / (3 + (math.sqrt(9 - x * x))))
 
 
-def simpson(a, b, m=10):
+def left_rectangle(a, b, n=30):  # метод лівих прямокутників
     integral = 0
-    n = 2 * m
-    h = (b - a) / n
-    fa = f(a)
-    fb = f(b)
-    for i in range(1, m):
-        x = a + (2 * i - 1) * h
-        integral = integral + 4 * f(x)
-    for i in range(1, m - 1):
-        x = a + 2 * i * h
-        integral = integral + 2 * f(x)
-    integral = (h / 3) * (fa + fb + integral)
-
-    return integral
-
-
-def left_rectangle(a, b, n=30):
-    integral = 0
-    h = (b - a) / n
+    h = (b - a) / n  # Обчислюємо величину кроку h
     x = a
 
-    for i in range(0, n - 1):
+    for i in range(0, n - 1):  # квадратна сума
         integral += f(x)
         x += h
     integral *= h
@@ -39,7 +23,7 @@ def left_rectangle(a, b, n=30):
 
 
 def newton_leibniz(a, b):
-    return F(a) - F(b)
+    return F(b) - F(a)
 
 
 def main():
@@ -47,9 +31,8 @@ def main():
     b = float(input('enter b: '))
 
     print('left rectangle: ' + str(left_rectangle(a, b)))
-    print('simpson: ' + str(simpson(a, b)))
-    print('newton-leibniz formula: ' + str(newton_leibniz(a, b)))
+    print('newton-leibniz formula: ' + str(newton_leibniz(a, b)))  # перевірка
 
 
 if __name__ == '__main__':
-    main()
+    main( )
