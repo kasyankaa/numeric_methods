@@ -37,9 +37,9 @@ def E(X, G):
 
 
 if __name__ == '__main__':
-    g = [lambda X: 1 - exp(-X[0]) * cos(X[1]) - X[0],  # 1 - e^(-x1) * cos(x2) - x1 = 0
-         lambda X: exp(-X[0]) * sin(X[1]) + 1 - X[1]]  # e^(-x1) * sin(x2) + 1 - x2 = 0
-    x = [0.1, 0.1]
+    g = [lambda X: X[0]*X[0]*X[1]*X[1]-(((X[0]*X[0]-X[1]*X[1]))/4)-0.5-X[0],
+         lambda X: X[0]*X[1]*(X[0]*X[0]-X[1]*X[1])-0.5-X[1]]
+    x = [1, 1]
     X = E(x, g)
     print('x1:', X[0], ', x2:', X[1])
     print('x1 з рівняння:', g[0](X))
